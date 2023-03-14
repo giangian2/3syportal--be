@@ -64,10 +64,8 @@ class SubmissionController extends Controller
             'document_name' => 'nullable|string'
         ]);
 
-        if ($submission->to_user != $user->id) {
-            return response()->json([
-                'message' => 'The user ' . $user->id . ' did not match the given submission'
-            ], 404);
+        if(!Gate::allows('view', $user) || !Gate::allows('update', $submission)){
+            abort(403);
         }
 
         if ($request->status == 'valid') {
@@ -95,7 +93,7 @@ class SubmissionController extends Controller
             'status' => 'required|string'
         ]);
 
-        if(!Gate::allows('view', $user) || !Gate::allows('view', $user)){
+        if(!Gate::allows('view', $user) || !Gate::allows('update', $submission)){
             abort(403);
         }
 

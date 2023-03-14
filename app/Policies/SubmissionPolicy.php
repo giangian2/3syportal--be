@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserType;
 use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -53,7 +54,20 @@ class SubmissionPolicy
      */
     public function update(User $user, Submission $submission)
     {
-        //
+        if($user->type==UserType::Normal()){
+            if ($submission->to_user != $user->id) {
+                return false;
+            }
+            return false;
+        }else if($user->type==UserType::Manager()){
+            $receiver=User::findOrFail($submission->to_user);
+            if($receiver->type!=UserType::Admin()){
+                return true;
+            }
+            return false;
+        }
+        return true;
+
     }
 
     /**
