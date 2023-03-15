@@ -9,9 +9,11 @@ use App\Events\DocumentUploaded;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Submission;
+use App\Enums\SubmissionStatus;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use BenSampo\Enum\Rules\EnumValue;
 use Storage;
 
 class SubmissionController extends Controller
@@ -59,7 +61,7 @@ class SubmissionController extends Controller
     {
         $request->validate([
             'document_type' => 'nullable|string',
-            'status' => 'nullable|string',
+            'status' => ['nullable', new EnumValue(SubmissionStatus::class,false)],
             'notes' => 'nullable|string',
             'document_name' => 'nullable|string'
         ]);
@@ -68,9 +70,9 @@ class SubmissionController extends Controller
             abort(403);
         }
 
-        if ($request->status == 'valid') {
+        if ($request->status == SubmissionStatus::Valid()) {
             event(new DocumentApproved($user, $submission));
-        } else if ($request->status == 'rejected') {
+        } else if ($request->status == SubmissionStatus::DocumentRefused()) {
             event(new DocumentRefused($user, $submission));
         }
 
@@ -90,7 +92,7 @@ class SubmissionController extends Controller
 
         $request->validate([
             'document' => 'required',
-            'status' => 'required|string'
+            'status' => ['required', new EnumValue(SubmissionStatus::class,false)],
         ]);
 
         if(!Gate::allows('view', $user) || !Gate::allows('update', $submission)){
@@ -108,10 +110,10 @@ class SubmissionController extends Controller
 
         $employee = User::find($submission->from_user);
 
-        if ($submission->status == 'valid') {
+        if ($submission->status == SubmissionStatus::Valid()) {
             event(new DocumentUploaded($user, $employee, $submission));
         } else {
-            if ($submission->status != 'signature required') {
+            if ($submission->status != SubmissionStatus::SignatureRequired()) {
                 event(new DocumentUploaded($employee, $user, $submission));
             }
         }
@@ -126,10 +128,8 @@ class SubmissionController extends Controller
     public function delete(Request $request, User $user, Submission $submission)
     {
 
-        if ($submission->to_user != $user->id) {
-            return response()->json([
-                'message' => 'The user ' . $user->id . ' did not match the given submission'
-            ], 404);
+        if(!Gate::allows('view', $user) || !Gate::allows('update', $submission)){
+            abort(403);
         }
 
         DB::table('reminder_mails')->where('submission_id', $submission->id)->delete();
@@ -153,7 +153,7 @@ class SubmissionController extends Controller
             'document_type' => 'required|string',
             'notes' => 'required|string',
             'document_name' => 'required|string',
-            'status' => 'required|string'
+            'status' => ['required', new EnumValue(SubmissionStatus::class,false)],
         ]);
 
         $new_submission = Submission::create([
@@ -165,7 +165,7 @@ class SubmissionController extends Controller
             'from_user' => $sender->id
         ]);
 
-        if ($request->status != 'valid') {
+        if ($request->status != SubmissionStatus::Valid()) {
             event(new SubmissionCreated($user, $new_submission));
         }
 
