@@ -35,7 +35,7 @@ class SendDocumentApprovedMail
         ];
 
         Mail::to($email)->send(
-            new DocumentApprovedMail($mailData)
+            new DocumentApprovedMail($mailData,$event->submission)
         );
     }
 }

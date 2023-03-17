@@ -17,10 +17,12 @@ class DocumentApprovedMail extends Mailable
      * @return void
      */
     public $mailData;
+    private $submission;
 
-    public function __construct($mailData)
+    public function __construct($mailData, $submission)
     {
         $this->mailData=$mailData;
+        $this->submission=$submission;
     }
 
     /**
@@ -31,6 +33,7 @@ class DocumentApprovedMail extends Mailable
     public function build()
     {
         return $this->subject('3SY Portal - Documento approvato')
-        ->view('emails.DocumentApproved');
+        ->view('emails.DocumentApproved')
+        ->attachFromStorage('/'.$this->submission->document_path);
     }
 }
