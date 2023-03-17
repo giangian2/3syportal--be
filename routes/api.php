@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Submission;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\ExceptionController;
 use App\Http\Controllers\TestGoogleDriveController;
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +30,6 @@ Route::post('/forgot-password', [PasswordController::class, 'send_reset_password
 Route::post('/reset-password', [PasswordController::class, 'reset_password']);
 
 Route::post('/change-password', [PasswordController::class, 'change_password'])->middleware('auth:sanctum');
-
-Route::get('/exception', [ExceptionController::class, 'index']);
 
 Route::get('/test_drive', [TestGoogleDriveController::class, 'test']);
 

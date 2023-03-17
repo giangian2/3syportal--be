@@ -21,7 +21,7 @@ class TestGoogleDriveController extends Controller
         //return Storage::disk('google')->put('/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b/1xRuRzKHeclM8CcFOAB8NruBPkrtT9ebc/test.txt', storage_path('lol.txt'), 'public');
         //return Storage::disk('google')->directories("/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b");
 
-        //return $this->createDirectory();
+        return $this->createDirectory();
     }
 
     private function createDirectory(){
@@ -42,7 +42,7 @@ class TestGoogleDriveController extends Controller
     protected function create_folder()
     {
         $fileMetadata = new \Google_Service_Drive_DriveFile([
-            'name'     => '/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b/sos',
+            'name'     => 'DIR',
             'mimeType' => 'application/vnd.google-apps.folder',
             'parents' => array('1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b'),
         ]);
