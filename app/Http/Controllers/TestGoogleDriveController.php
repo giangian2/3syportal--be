@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 
@@ -18,10 +18,10 @@ class TestGoogleDriveController extends Controller
     public function test(Request $request){
 
         //return Storage::disk('google')->files("/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b");
-        //return Storage::disk('google')->put('/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b/1xRuRzKHeclM8CcFOAB8NruBPkrtT9ebc/test.txt', storage_path('lol.txt'), 'public');
+        return Storage::disk('google')->put('/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b/1xRuRzKHeclM8CcFOAB8NruBPkrtT9ebc/test.pdf', Storage::disk('s3')->get('users/10/submissions/87/file.pdf') , 'public');
         //return Storage::disk('google')->directories("/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b");
 
-        return $this->createDirectory();
+        //return $this->createDirectory();
     }
 
     private function createDirectory(){

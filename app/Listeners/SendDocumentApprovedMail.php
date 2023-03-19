@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\DocumentApprovedMail;
 use App\Events\DocumentApproved;
 use Illuminate\Contracts\Queue\ShouldQueue;

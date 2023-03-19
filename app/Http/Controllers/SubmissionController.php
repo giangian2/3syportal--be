@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use BenSampo\Enum\Rules\EnumValue;
-use Storage;
+use App\Jobs\SendDocumentApprovedMail;
+use App\Jobs\UploadSubmissionDocument;
+use Illuminate\Support\Facades\Storage;
 
 class SubmissionController extends Controller
 {
@@ -59,6 +61,7 @@ class SubmissionController extends Controller
 
     public function update(Request $request, User $user, Submission $submission)
     {
+
         $request->validate([
             'document_type' => 'nullable|string',
             'status' => ['nullable', new EnumValue(SubmissionStatus::class,false)],
@@ -71,7 +74,10 @@ class SubmissionController extends Controller
         }
 
         if ($request->status == SubmissionStatus::Valid()) {
-            event(new DocumentApproved($user, $submission));
+            //event(new DocumentApproved($user, $submission));
+            SendDocumentApprovedMail::dispatch($user, $submission);
+            UploadSubmissionDocument::dispatch();
+
         } else if ($request->status == SubmissionStatus::DocumentRefused()) {
             event(new DocumentRefused($user, $submission));
         }

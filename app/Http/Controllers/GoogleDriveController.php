@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class GoogleDriveController extends Controller
 {
-    public function test(Request $request){
-        $dirs = Storage::disk('google')->allDirectories();
-        return $dirs;
+    public static function createDirectory(string $dirname){
+        //return folder id
+    }
+
+    public static function uploadFile(string $dirHash, mixed $file, string $filename){
+        //return file id
     }
 }

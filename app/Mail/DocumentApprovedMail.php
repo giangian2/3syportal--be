@@ -33,7 +33,7 @@ class DocumentApprovedMail extends Mailable
     public function build()
     {
         return $this->subject('3SY Portal - Documento approvato')
-        ->view('emails.DocumentApproved')
-        ->attachFromStorage('/'.$this->submission->document_path);
+        ->view('emails.DocumentApproved');
+        /*->attachFromStorage('/'.$this->submission->document_path);*/
     }
 }
