@@ -17,6 +17,8 @@ use BenSampo\Enum\Rules\EnumValue;
 use App\Jobs\SendDocumentApprovedMail;
 use App\Jobs\UploadSubmissionDocument;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Bus;
+use Throwable;
 
 class SubmissionController extends Controller
 {
@@ -75,8 +77,9 @@ class SubmissionController extends Controller
 
         if ($request->status == SubmissionStatus::Valid()) {
             //event(new DocumentApproved($user, $submission));
-            SendDocumentApprovedMail::dispatch($user, $submission);
-            UploadSubmissionDocument::dispatch();
+            SendDocumentApprovedMail::dispatch($user,$submission);
+            UploadSubmissionDocument::dispatch($user,$submission);
+
 
         } else if ($request->status == SubmissionStatus::DocumentRefused()) {
             event(new DocumentRefused($user, $submission));
