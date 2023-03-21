@@ -49,7 +49,7 @@ class GoogleDriveController extends Controller
         return $folder->id;
     }
 
-    public function uploadFile(string $dirHash, mixed $storagePath, string $filename){
+    public function uploadFile(string $dirHash, string $storagePath, string $filename){
         return Storage::disk('google')->put('/'.$this->rootFolderId.'/'.$dirHash.'/'.$filename, Storage::disk('s3')->get($storagePath) , 'public');
     }
 

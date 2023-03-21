@@ -18,7 +18,7 @@ class TestGoogleDriveController extends Controller
     public function test(Request $request){
 
         //return Storage::disk('google')->files("/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b");
-        return Storage::disk('google')->put('/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b/1xRuRzKHeclM8CcFOAB8NruBPkrtT9ebc/test.pdf', Storage::disk('s3')->get('users/10/submissions/87/file.pdf') , 'public');
+        return Storage::disk('google')->put('/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b/1ns_OMGBUKCNJnrCQ5INgd0r1j4hM2ea1/test.pdf', Storage::disk('s3')->get('users/10/submissions/87/file.pdf') , 'public');
         //return Storage::disk('google')->directories("/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b");
 
         //return $this->createDirectory();

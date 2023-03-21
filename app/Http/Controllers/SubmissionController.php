@@ -77,9 +77,9 @@ class SubmissionController extends Controller
 
         if ($request->status == SubmissionStatus::Valid()) {
             //event(new DocumentApproved($user, $submission));
-            SendDocumentApprovedMail::dispatch($user,$submission);
-            UploadSubmissionDocument::dispatch($user,$submission);
-
+            $this->dispatch(new UploadSubmissionDocument( $user,$submission));
+            $this->dispatch(new SendDocumentApprovedMail( $user, $submission));
+            exec('php artisan queue:work --once');
 
         } else if ($request->status == SubmissionStatus::DocumentRefused()) {
             event(new DocumentRefused($user, $submission));

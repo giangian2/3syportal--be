@@ -50,14 +50,13 @@ class UploadSubmissionDocument implements ShouldQueue
             DB::table('user_cloud_space')->insert(['space'=> 'drive', 'dirname' => $folder_id, 'dirhash' => $folder_id, 'user_id' => $this->user->id]);
         }
 
-        $folder_id=DB::table('user_cloud_space')
+        $folder_hash=DB::table('user_cloud_space')
                         ->where('user_id', $this->user->id)
                         ->where('space', 'drive')
-                        ->get();
+                        ->value('dirhash');
 
-        $gdriveController->uploadFile($folder_id, $this->submission->document_path, "testName.pdf");
+        $gdriveController->uploadFile($folder_hash, /*$this->submission->document_path*/ 'users/10/submissions/87/file.pdf', "testName.pdf");
 
-        unset($gdriveController);
 
     }
 }
