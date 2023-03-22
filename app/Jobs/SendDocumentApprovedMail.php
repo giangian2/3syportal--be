@@ -22,12 +22,14 @@ class SendDocumentApprovedMail implements ShouldQueue
      *
      * @return void
      */
-    protected $user;
+    protected $email;
+    protected $mailData;
     protected $submission;
 
-    public function __construct(User $user,Submission $submission)
+    public function __construct($email,$mailData,$submission)
     {
-        $this->user=$user;
+        $this->email=$email;
+        $this->mailData=$mailData;
         $this->submission=$submission;
     }
 
@@ -38,16 +40,8 @@ class SendDocumentApprovedMail implements ShouldQueue
      */
     public function handle()
     {
-
-        $email=$this->user->email;
-        $mailData = [
-            'name' => $this->user->name,
-            'document_name' => $this->submission->document_name,
-        ];
-
-
-        Mail::to($email)->send(
-            new DocumentApprovedMail($mailData,$this->submission)
+        Mail::to($this->email)->send(
+            new DocumentApprovedMail($this->mailData,$this->submission)
         );
     }
 }

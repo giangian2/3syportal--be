@@ -22,15 +22,13 @@ class SendDocumentUploadedMail implements ShouldQueue
      *
      * @return void
      */
-    protected User $user;
-    protected User $employee;
-    protected Submission $submission;
+    protected $email;
+    protected $mailData;
 
-    public function __construct(User $user, User $employee, Submission $submission)
+    public function __construct($email, $mailData)
     {
-        $this->user=$user;
-        $this->employee=$employee;
-        $this->submission=$submission;
+        $this->email=$email;
+        $this->mailData=$mailData;
     }
 
     /**
@@ -40,16 +38,9 @@ class SendDocumentUploadedMail implements ShouldQueue
      */
     public function handle()
     {
-        $email = $this->user->email;
-        $mailData = [
-            'name' => $this->user->name,
-            'document_name' => $this->submission->document_name,
-            'employee_name' => $this->employee->name,
-            'status' => $this->submission->status,
-        ];
 
-        Mail::to($email)->send(
-            new DocumentUploadedMail($mailData)
+        Mail::to($this->email)->send(
+            new DocumentUploadedMail($this->mailData)
         );
     }
 }

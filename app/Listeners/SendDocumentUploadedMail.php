@@ -7,6 +7,7 @@ use App\Mail\DocumentUploadedMail;
 use App\Events\DocumentUploaded;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Jobs\SendDocumentUploadedMail as DocumentUploadedJob;
 
 class SendDocumentUploadedMail
 {
@@ -40,8 +41,6 @@ class SendDocumentUploadedMail
             'status' => $event->submission->status,
         ];
 
-        Mail::to($email)->send(
-            new DocumentUploadedMail($mailData)
-        );
+        DocumentUploadedJob::dispatch($email, $mailData);
     }
 }

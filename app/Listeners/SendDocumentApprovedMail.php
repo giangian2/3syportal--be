@@ -7,6 +7,7 @@ use App\Mail\DocumentApprovedMail;
 use App\Events\DocumentApproved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Jobs\SendDocumentApprovedMail as DocumentApprovedJob;
 
 class SendDocumentApprovedMail
 {
@@ -34,8 +35,6 @@ class SendDocumentApprovedMail
             'document_name' => $event->submission->document_name,
         ];
 
-        Mail::to($email)->send(
-            new DocumentApprovedMail($mailData,$event->submission)
-        );
+        DocumentApprovedJob::dispatch($email, $mailData, $event->submission);
     }
 }

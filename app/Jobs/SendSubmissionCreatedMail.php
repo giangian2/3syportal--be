@@ -22,13 +22,15 @@ class SendSubmissionCreatedMail implements ShouldQueue
      *
      * @return void
      */
-    protected User $user;
-    protected Submission $submission;
+    protected $email;
+    protected $mailData;
+    protected $submission;
 
-    public function __construct(User $user, Submission $submission)
+    public function __construct($email, $mailData, $submission)
     {
-        $this->user=$user;
+        $this->email=$email;
         $this->submission=$submission;
+        $this->mailData=$mailData;
     }
 
     /**
@@ -39,15 +41,8 @@ class SendSubmissionCreatedMail implements ShouldQueue
     public function handle()
     {
 
-        $email=$this->user->email;
-        $mailData = [
-            'name' => $this->user->name,
-	        'document_name' => $this->submission->document_name,
-	        'status' => $this->submission->status,
-        ];
-
-        Mail::to($email)->send(
-            new SubmissionCreatedMail($mailData, $this->submission->status)
+        Mail::to($this->email)->send(
+            new SubmissionCreatedMail($this->mailData, $this->submission->status)
         );
     }
 }

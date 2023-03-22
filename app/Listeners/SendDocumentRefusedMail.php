@@ -7,6 +7,7 @@ use App\Mail\DocumentRefusedMail;
 use App\Events\DocumentRefused;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Jobs\SendDocumentRefusedMail as DocumentRefusedJob;
 
 class SendDocumentRefusedMail
 {
@@ -35,8 +36,6 @@ class SendDocumentRefusedMail
             'notes' => $event->submission->notes
         ];
 
-        Mail::to($email)->send(
-            new DocumentRefusedMail($mailData)
-        );
+        DocumentRefusedJob::dispatch($email,$mailData);
     }
 }

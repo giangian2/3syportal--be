@@ -78,7 +78,7 @@ class SubmissionController extends Controller
 
         if ($request->status == SubmissionStatus::Valid()) {
             $this->dispatch(new UploadSubmissionDocument( $user,$submission));
-            $this->dispatch(new SendDocumentApprovedMail( $user, $submission));
+            event(new DocumentApproved($user,$submission));
         } else if ($request->status == SubmissionStatus::DocumentRefused()) {
             event(new DocumentRefused($user, $submission));
         }

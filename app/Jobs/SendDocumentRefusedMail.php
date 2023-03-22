@@ -23,13 +23,13 @@ class SendDocumentRefusedMail implements ShouldQueue
      * @return void
      */
 
-    protected User $user;
-    protected Submission $submission;
+    protected  $email;
+    protected  $mailData;
 
-    public function __construct(User $user, Submission $submission)
+    public function __construct($email,$mailData)
     {
-        $this->user=$user;
-        $this->submission=$submission;
+        $this->email=$email;
+        $this->mailData=$mailData;
     }
 
     /**
@@ -39,15 +39,9 @@ class SendDocumentRefusedMail implements ShouldQueue
      */
     public function handle()
     {
-        $email=$this->user->email;
-        $mailData = [
-            'name' => $this->user->name,
-            'document_name' => $this->submission->document_name,
-            'notes' => $this->submission->notes
-        ];
 
-        Mail::to($email)->send(
-            new DocumentRefusedMail($mailData)
+        Mail::to($this->email)->send(
+            new DocumentRefusedMail($this->mailData)
         );
     }
 }

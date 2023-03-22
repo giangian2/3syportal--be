@@ -2,11 +2,12 @@
 
 namespace App\Listeners;
 
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\SubmissionCreatedMail;
 use App\Events\SubmissionCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Jobs\SendSubmissionCreatedMail as SubmissionCreatedJob;
 
 class SendSubmissionCreatedMail
 {
@@ -35,8 +36,6 @@ class SendSubmissionCreatedMail
 	        'status' => $event->submission->status,
         ];
 
-        Mail::to($email)->send(
-            new SubmissionCreatedMail($mailData, $event->submission->status)
-        );
+        SubmissionCreatedJob::dispatch($email, $mailData, $event->submission);
     }
 }
