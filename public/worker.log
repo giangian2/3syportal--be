@@ -14,3 +14,28 @@
 [2023-03-21 14:48:06][18] Processed:  App\Jobs\UploadSubmissionDocument
 [2023-03-21 14:48:07][19] Processing: App\Jobs\SendDocumentApprovedMail
 [2023-03-21 14:48:08][19] Processed:  App\Jobs\SendDocumentApprovedMail
+
+   Symfony\Component\Process\Exception\ProcessTimedOutException 
+
+  The process "'/usr/bin/php7.4' 'artisan' 'queue:work' '--once' '--name=default' '--queue=default' '--backoff=0' '--memory=128' '--sleep=3' '--tries=1'" exceeded the timeout of 60 seconds.
+
+  at /home/gianluca/3syportal/v1.1/vendor/symfony/process/Process.php:1204
+    1200▕ 
+    1201▕         if (null !== $this->timeout && $this->timeout < microtime(true) - $this->starttime) {
+    1202▕             $this->stop(0);
+    1203▕ 
+  ➜ 1204▕             throw new ProcessTimedOutException($this, ProcessTimedOutException::TYPE_GENERAL);
+    1205▕         }
+    1206▕ 
+    1207▕         if (null !== $this->idleTimeout && $this->idleTimeout < microtime(true) - $this->lastOutputTime) {
+    1208▕             $this->stop(0);
+
+      [2m+18 vendor frames [22m
+  19  /home/gianluca/3syportal/v1.1/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+[2023-03-21 19:46:49][20] Processing: App\Jobs\UploadSubmissionDocument
+[2023-03-21 19:46:56][20] Processed:  App\Jobs\UploadSubmissionDocument
+[2023-03-21 19:46:56][21] Processing: App\Jobs\SendDocumentApprovedMail
+[2023-03-21 19:46:58][21] Processed:  App\Jobs\SendDocumentApprovedMail
+[2023-03-22 16:29:06][22] Processing: App\Jobs\UploadFileS3
+[2023-03-22 16:29:07][22] Processed:  App\Jobs\UploadFileS3

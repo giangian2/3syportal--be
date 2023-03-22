@@ -19,7 +19,8 @@ class UploadSubmissionDocument implements ShouldQueue
 
     /**
      * Create a new job instance.
-     *
+     * @param User User
+     * @param Submission Sub
      * @return void
      */
 
@@ -46,8 +47,8 @@ class UploadSubmissionDocument implements ShouldQueue
                             ->count();
 
         if($cloud_spaces==0){
-            $folder_id=$gdriveController->createDirectory($this->user->id);
-            DB::table('user_cloud_space')->insert(['space'=> 'drive', 'dirname' => $folder_id, 'dirhash' => $folder_id, 'user_id' => $this->user->id]);
+            $folder_id=$gdriveController->createDirectory(trim($this->user->name.$this->user->surname));
+            DB::table('user_cloud_space')->insert(['space'=> 'drive', 'dirname' => trim($this->user->name.$this->user->surname), 'dirhash' => $folder_id, 'user_id' => $this->user->id]);
         }
 
         $folder_hash=DB::table('user_cloud_space')

@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
+use League\Flysystem\Exception;
 
 class FileController extends Controller
 {
     public static function decode_base64($file){
 
         $image_64 = $file; //your base64 encoded data
-        $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
-        $image = str_replace($replace, '', $image_64); 
-        $image = str_replace(' ', '+', $image); 
+        $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+        $image = str_replace($replace, '', $image_64);
+        $image = str_replace(' ', '+', $image);
         return $image;
     }
 

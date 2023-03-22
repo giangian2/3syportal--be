@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\DocumentUploadedMail;
 use App\Events\DocumentUploaded;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,6 +15,10 @@ class SendDocumentUploadedMail
      *
      * @return void
      */
+
+
+
+
     public function __construct()
     {
         //
@@ -28,12 +32,12 @@ class SendDocumentUploadedMail
      */
     public function handle(DocumentUploaded $event)
     {
-        $email=$event->user->email;
+        $email = $event->user->email;
         $mailData = [
             'name' => $event->user->name,
             'document_name' => $event->submission->document_name,
-	    'employee_name' => $event->employee->name,
-	    'status' => $event->submission->status,
+            'employee_name' => $event->employee->name,
+            'status' => $event->submission->status,
         ];
 
         Mail::to($email)->send(

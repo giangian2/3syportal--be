@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UploadFileS3;
 use App\Events\DeletedUser;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Enums\UserType;
 
@@ -142,6 +143,8 @@ class AccountController extends Controller
         $extension=FileController::get_file_extension($request->profileImage);
         $file_path = 'users/'.$user->id.'/profile.'.$extension;
         FileController::store_file($file_path, $file, 's3');
+
+        $this->dispatch(new UploadFileS3($file_path, $file));
 
         $user->profileImage=$file_path;
         $user->save();

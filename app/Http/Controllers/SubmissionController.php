@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use BenSampo\Enum\Rules\EnumValue;
+use App\Jobs\UploadFileS3;
 use App\Jobs\SendDocumentApprovedMail;
 use App\Jobs\UploadSubmissionDocument;
 use Illuminate\Support\Facades\Storage;
@@ -76,11 +77,8 @@ class SubmissionController extends Controller
         }
 
         if ($request->status == SubmissionStatus::Valid()) {
-            //event(new DocumentApproved($user, $submission));
             $this->dispatch(new UploadSubmissionDocument( $user,$submission));
             $this->dispatch(new SendDocumentApprovedMail( $user, $submission));
-            exec('php artisan queue:work --once');
-
         } else if ($request->status == SubmissionStatus::DocumentRefused()) {
             event(new DocumentRefused($user, $submission));
         }
@@ -111,7 +109,8 @@ class SubmissionController extends Controller
         $doc = FileController::decode_base64($request->document);
         $extension = FileController::get_file_extension($request->document);
         $doc_path = 'users/' . $user->id . '/submissions/' . $submission->id . '/file.' . $extension;
-        FileController::store_file($doc_path, $doc, 's3');
+
+        $this->dispatch(new UploadFileS3($doc_path, $doc));
 
         $submission->document_path = $doc_path;
         $submission->status = $request->status;

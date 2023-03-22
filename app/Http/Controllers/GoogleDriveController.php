@@ -11,7 +11,7 @@ class GoogleDriveController extends Controller
     protected $ClientId     = '843381078994-qhrd02ecu7das6p3jkvla9h32je1gkpv.apps.googleusercontent.com';
     protected $ClientSecret = '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';
     protected $refreshToken = '1//04Xsv2Vhx4xsDCgYIARAAGAQSNwF-L9Ir3aPJGbOkV7TyLiCRrIgzWVJuvTGs4k602iOdqMFDp8noaCx5d-xHayZcgd9zSwQrCrw';
-    private $rootFolderId = '1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b';
+    protected $rootFolderId = '1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b';
 
 
     /*1yPy2Mg9iFJGs7hzEtBnsHALQs7bZcZ6P
