@@ -55,3 +55,101 @@
 [2023-03-22 18:56:49][29] Processed:  App\Jobs\UploadFileS3
 [2023-03-22 18:56:49][30] Processing: App\Jobs\SendDocumentUploadedMail
 [2023-03-22 18:56:50][30] Processed:  App\Jobs\SendDocumentUploadedMail
+[2023-03-23 18:00:21][31] Processing: App\Jobs\UploadFileS3
+[2023-03-23 18:00:22][31] Processed:  App\Jobs\UploadFileS3
+[2023-03-23 18:00:22][32] Processing: App\Jobs\SendDocumentUploadedMail
+[2023-03-23 18:00:24][32] Processed:  App\Jobs\SendDocumentUploadedMail
+[2023-03-23 18:00:24][33] Processing: App\Jobs\UploadSubmissionDocument
+PHP Fatal error:  Constant expression contains invalid operations in /home/gianluca/3syportal/v1.1/app/Http/Controllers/GoogleDriveController.php on line 11
+
+   Symfony\Component\ErrorHandler\Error\FatalError 
+
+  Constant expression contains invalid operations
+
+  at app/Http/Controllers/GoogleDriveController.php:11
+      7▕ use Illuminate\Http\Request;
+      8▕ 
+      9▕ class GoogleDriveController extends Controller
+     10▕ {
+  ➜  11▕     protected $ClientId     = env("GOOGLE_DRIVE_CLIENT_ID")/*'843381078994-qhrd02ecu7das6p3jkvla9h32je1gkpv.apps.googleusercontent.com'*/;
+     12▕     protected $ClientSecret = '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';
+     13▕     protected $refreshToken = '1//04Xsv2Vhx4xsDCgYIARAAGAQSNwF-L9Ir3aPJGbOkV7TyLiCRrIgzWVJuvTGs4k602iOdqMFDp8noaCx5d-xHayZcgd9zSwQrCrw';
+     14▕     protected $rootFolderId = '1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b';
+     15▕
+
+
+   Whoops\Exception\ErrorException 
+
+  Constant expression contains invalid operations
+
+  at app/Http/Controllers/GoogleDriveController.php:11
+      7▕ use Illuminate\Http\Request;
+      8▕ 
+      9▕ class GoogleDriveController extends Controller
+     10▕ {
+  ➜  11▕     protected $ClientId     = env("GOOGLE_DRIVE_CLIENT_ID")/*'843381078994-qhrd02ecu7das6p3jkvla9h32je1gkpv.apps.googleusercontent.com'*/;
+     12▕     protected $ClientSecret = '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';
+     13▕     protected $refreshToken = '1//04Xsv2Vhx4xsDCgYIARAAGAQSNwF-L9Ir3aPJGbOkV7TyLiCRrIgzWVJuvTGs4k602iOdqMFDp8noaCx5d-xHayZcgd9zSwQrCrw';
+     14▕     protected $rootFolderId = '1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b';
+     15▕
+
+      [2m+1 vendor frames [22m
+  2   [internal]:0
+      Whoops\Run::handleShutdown()
+[2023-03-23 18:00:25][34] Processing: App\Jobs\SendDocumentApprovedMail
+[2023-03-23 18:00:30][34] Processed:  App\Jobs\SendDocumentApprovedMail
+[2023-03-23 18:01:56][33] Processing: App\Jobs\UploadSubmissionDocument
+[2023-03-23 18:01:56][33] Failed:     App\Jobs\UploadSubmissionDocument
+[2023-03-23 18:04:28][35] Processing: App\Jobs\UploadFileS3
+[2023-03-23 18:04:29][35] Processed:  App\Jobs\UploadFileS3
+[2023-03-23 18:04:30][36] Processing: App\Jobs\SendDocumentUploadedMail
+[2023-03-23 18:04:31][36] Processed:  App\Jobs\SendDocumentUploadedMail
+[2023-03-23 18:04:38][37] Processing: App\Jobs\UploadSubmissionDocument
+[2023-03-23 18:04:44][37] Processed:  App\Jobs\UploadSubmissionDocument
+[2023-03-23 18:04:44][38] Processing: App\Jobs\SendDocumentApprovedMail
+[2023-03-23 18:04:50][38] Processed:  App\Jobs\SendDocumentApprovedMail
+[2023-03-23 18:09:28][39] Processing: App\Jobs\UploadSubmissionDocument
+PHP Fatal error:  Constant expression contains invalid operations in /home/gianluca/3syportal/v1.1/app/Http/Controllers/GoogleDriveController.php on line 11
+
+   Symfony\Component\ErrorHandler\Error\FatalError 
+
+  Constant expression contains invalid operations
+
+  at app/Http/Controllers/GoogleDriveController.php:11
+      7▕ use Illuminate\Http\Request;
+      8▕ 
+      9▕ class GoogleDriveController extends Controller
+     10▕ {
+  ➜  11▕     private $ClientId     =env("GOOGLE_DRIVE_CLIENT_ID")/*'843381078994-qhrd02ecu7das6p3jkvla9h32je1gkpv.apps.googleusercontent.com'*/;
+     12▕     protected $ClientSecret = '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';
+     13▕     protected $refreshToken = '1//04Xsv2Vhx4xsDCgYIARAAGAQSNwF-L9Ir3aPJGbOkV7TyLiCRrIgzWVJuvTGs4k602iOdqMFDp8noaCx5d-xHayZcgd9zSwQrCrw';
+     14▕     protected $rootFolderId = '1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b';
+     15▕
+
+
+   Whoops\Exception\ErrorException 
+
+  Constant expression contains invalid operations
+
+  at app/Http/Controllers/GoogleDriveController.php:11
+      7▕ use Illuminate\Http\Request;
+      8▕ 
+      9▕ class GoogleDriveController extends Controller
+     10▕ {
+  ➜  11▕     private $ClientId     =env("GOOGLE_DRIVE_CLIENT_ID")/*'843381078994-qhrd02ecu7das6p3jkvla9h32je1gkpv.apps.googleusercontent.com'*/;
+     12▕     protected $ClientSecret = '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';
+     13▕     protected $refreshToken = '1//04Xsv2Vhx4xsDCgYIARAAGAQSNwF-L9Ir3aPJGbOkV7TyLiCRrIgzWVJuvTGs4k602iOdqMFDp8noaCx5d-xHayZcgd9zSwQrCrw';
+     14▕     protected $rootFolderId = '1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b';
+     15▕
+
+      [2m+1 vendor frames [22m
+  2   [internal]:0
+      Whoops\Run::handleShutdown()
+[2023-03-23 18:09:28][40] Processing: App\Jobs\SendDocumentApprovedMail
+[2023-03-23 18:09:34][40] Processed:  App\Jobs\SendDocumentApprovedMail
+[2023-03-23 18:10:59][39] Processing: App\Jobs\UploadSubmissionDocument
+[2023-03-23 18:10:59][39] Failed:     App\Jobs\UploadSubmissionDocument
+[2023-03-23 18:21:01][41] Processing: App\Jobs\UploadSubmissionDocument
+[2023-03-23 18:21:07][41] Processed:  App\Jobs\UploadSubmissionDocument
+[2023-03-23 18:21:07][42] Processing: App\Jobs\SendDocumentApprovedMail
+[2023-03-23 18:21:13][42] Processed:  App\Jobs\SendDocumentApprovedMail

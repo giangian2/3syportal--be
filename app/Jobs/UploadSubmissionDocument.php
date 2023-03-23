@@ -56,7 +56,7 @@ class UploadSubmissionDocument implements ShouldQueue
                         ->where('space', 'drive')
                         ->value('dirhash');
 
-        $gdriveController->uploadFile($folder_hash, /*$this->submission->document_path*/ 'users/10/submissions/87/file.pdf', "testName.pdf");
+        $gdriveController->uploadFile($folder_hash, $this->submission->document_path, "testName.pdf");
 
 
     }

@@ -31,7 +31,6 @@ Route::post('/reset-password', [PasswordController::class, 'reset_password']);
 
 Route::post('/change-password', [PasswordController::class, 'change_password'])->middleware('auth:sanctum');
 
-Route::get('/test_drive', [TestGoogleDriveController::class, 'test']);
 
 /*
 // Account confirmation routes (token)
