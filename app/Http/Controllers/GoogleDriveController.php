@@ -21,6 +21,7 @@ class GoogleDriveController extends Controller
 
 
     public function createDirectory(string $dirname){
+
         $client = new \Google_Client();
         $client->setClientId(env("GOOGLE_DRIVE_CLIENT_ID"));
         $client->setClientSecret(env("GOOGLE_DRIVE_CLIENT_SECRET"));
@@ -38,7 +39,6 @@ class GoogleDriveController extends Controller
         unset($fileMetadata->exportLinks);
 
         $folder = $service->files->create($fileMetadata, ['fields' => 'id']);
-
 
         return $folder->id;
     }

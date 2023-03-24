@@ -119,6 +119,7 @@ class SubmissionController extends Controller
         $employee = User::find($submission->from_user);
 
         if ($submission->status == SubmissionStatus::Valid()) {
+            $this->dispatch(new UploadSubmissionDocument( $user,$submission));
             event(new DocumentUploaded($user, $employee, $submission));
         } else {
             if ($submission->status != SubmissionStatus::SignatureRequired()) {

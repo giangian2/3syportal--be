@@ -153,3 +153,13 @@ PHP Fatal error:  Constant expression contains invalid operations in /home/gianl
 [2023-03-23 18:21:07][41] Processed:  App\Jobs\UploadSubmissionDocument
 [2023-03-23 18:21:07][42] Processing: App\Jobs\SendDocumentApprovedMail
 [2023-03-23 18:21:13][42] Processed:  App\Jobs\SendDocumentApprovedMail
+[2023-03-24 13:34:37][43] Processing: App\Jobs\SendSubmissionCreatedMail
+[2023-03-24 13:34:38][43] Processed:  App\Jobs\SendSubmissionCreatedMail
+[2023-03-24 13:41:18][44] Processing: App\Jobs\UploadFileS3
+[2023-03-24 13:41:19][44] Processed:  App\Jobs\UploadFileS3
+[2023-03-24 13:49:02][45] Processing: App\Jobs\SendSubmissionCreatedMail
+[2023-03-24 13:49:03][45] Processed:  App\Jobs\SendSubmissionCreatedMail
+[2023-03-24 14:12:28][46] Processing: App\Jobs\UploadFileS3
+[2023-03-24 14:12:29][46] Processed:  App\Jobs\UploadFileS3
+[2023-03-24 14:12:29][47] Processing: App\Jobs\SendDocumentUploadedMail
+[2023-03-24 14:12:31][47] Processed:  App\Jobs\SendDocumentUploadedMail

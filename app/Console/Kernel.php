@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new SendReminderMails)->daily();
+        //$schedule->command("backup:run --only-db --only-to-disk=s3")->everyMinute();
     }
 
     /**
