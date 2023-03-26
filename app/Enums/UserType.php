@@ -17,7 +17,7 @@ final class UserType extends Enum
     const Normal = 0;
 
 
-    public static function toString($value)
+    public static function toString(UserType $value)
     {
         if ($value == UserType::Admin())
             return "admin";
@@ -28,5 +28,14 @@ final class UserType extends Enum
 
         return "none";
 
+    }
+
+    public function ocnverted(){
+        if($this->value==UserType::Admin())
+            return "admin";
+        if($this->value==UserType::Manager())
+            return "manager";
+        if($this->value==UserType::Normal())
+            return "normal";
     }
 }
