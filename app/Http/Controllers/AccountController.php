@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Enums\UserType;
+use App\Http\Resources\UserResource;
 
 class AccountController extends Controller
 {
@@ -25,27 +26,20 @@ class AccountController extends Controller
         $sender=auth()->user();
 
         if($sender->type==UserType::Manager()){
-            $users = DB::table('users')
-                        ->where('type','=',0)
+            $users = User::where('type','=',0)
                         ->where('deleted_at','=', NULL)
                         ->where('id','!=',$sender->id)
                         ->get();
         }else if(UserType::fromValue($sender->type)==UserType::Admin()){
-            $users = DB::table('users')
-                        ->where('type','<',UserType::Admin)
+            $users = User::where('type','<',UserType::Admin)
                         ->where('deleted_at','=', NULL)
                         ->where('id','!=',$sender->id)
                         ->get();
         }
 
-        foreach($users as $user){
-            if(isset($user->profileImage))
-                $user->profileImage=$url = Storage::disk('s3')->temporaryUrl($user->profileImage, now()->addMinutes(60));
-        }
-
         return response()->json([
             'status' => true,
-            'users' => $users
+            'users' => UserResource::collection($users)
         ]);
     }
 
@@ -58,12 +52,9 @@ class AccountController extends Controller
 
         $user=User::where('id', $user->id)->first();
 
-        if(isset($user->profileImage))
-                $user->profileImage= $url = Storage::disk('s3')->temporaryUrl($user->profileImage, now()->addMinutes(60));
-
         return response()->json([
             'status' => true,
-            'user' => $user
+            'user' => new UserResource($user)
         ]);
     }
 
@@ -97,10 +88,11 @@ class AccountController extends Controller
 
         $user->update($request->all());
 
+
         return response()->json([
             'status' => true,
             'message' => "user Updated successfully!",
-            'user' => $user
+            'user' => new UserResource($user)
         ], 200);
     }
 

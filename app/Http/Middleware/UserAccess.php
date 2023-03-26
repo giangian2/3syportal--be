@@ -17,7 +17,7 @@ class UserAccess
     */
    public function handle(Request $request, Closure $next, $userTypes)
    {
-        $user_type=auth()->user()->type;
+        $user_type=UserType::fromValue(auth()->user()->type);
         $converted=UserType::toString($user_type);
         if (in_array($converted, explode('|', $userTypes))) {
             return $next($request);

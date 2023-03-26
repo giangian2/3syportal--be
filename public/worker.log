@@ -163,3 +163,22 @@ PHP Fatal error:  Constant expression contains invalid operations in /home/gianl
 [2023-03-24 14:12:29][46] Processed:  App\Jobs\UploadFileS3
 [2023-03-24 14:12:29][47] Processing: App\Jobs\SendDocumentUploadedMail
 [2023-03-24 14:12:31][47] Processed:  App\Jobs\SendDocumentUploadedMail
+
+   Symfony\Component\Process\Exception\ProcessTimedOutException 
+
+  The process "'/usr/bin/php7.4' 'artisan' 'queue:work' '--once' '--name=default' '--queue=default' '--backoff=0' '--memory=128' '--sleep=3' '--tries=1'" exceeded the timeout of 60 seconds.
+
+  at /home/gianluca/3syportal/v1.1/vendor/symfony/process/Process.php:1204
+    1200▕ 
+    1201▕         if (null !== $this->timeout && $this->timeout < microtime(true) - $this->starttime) {
+    1202▕             $this->stop(0);
+    1203▕ 
+  ➜ 1204▕             throw new ProcessTimedOutException($this, ProcessTimedOutException::TYPE_GENERAL);
+    1205▕         }
+    1206▕ 
+    1207▕         if (null !== $this->idleTimeout && $this->idleTimeout < microtime(true) - $this->lastOutputTime) {
+    1208▕             $this->stop(0);
+
+      [2m+18 vendor frames [22m
+  19  /home/gianluca/3syportal/v1.1/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
