@@ -43,10 +43,11 @@ class UploadSubsToDrive extends Command
     public function handle()
     {
 	    $subs=Submission::where('status','valid')->get();
+	    
 	    foreach($subs as $sub){
-		$this->info($sub->id);
-		$user=User::findOrFail($sub->to_user);
-		UploadSubmissionDocument::dispatch($user,$sub);
-    	    }
+		    $user=User::find($sub->to_user);
+		    UploadSubmissionDocument::dispatch($user,$sub);
+	    }
+	        
     }
 }
