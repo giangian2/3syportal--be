@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Submission;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\TestGoogleDriveController;
+use App\Http\Controllers\GoogleDriveController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,7 +31,7 @@ Route::post('/reset-password', [PasswordController::class, 'reset_password']);
 
 Route::post('/change-password', [PasswordController::class, 'change_password'])->middleware('auth:sanctum');
 
-
+Route::get('/test_drive', [GoogleDriveController::class, 'test']);
 /*
 // Account confirmation routes (token)
 Route::group(['middleware'=> ['auth:sanctum']], function(){

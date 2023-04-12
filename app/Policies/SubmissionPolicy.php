@@ -58,7 +58,7 @@ class SubmissionPolicy
             if ($submission->to_user != $user->id) {
                 return false;
             }
-            return false;
+            return true;
         }else if($user->type==UserType::Manager()){
             $receiver=User::findOrFail($submission->to_user);
             if($receiver->type!=UserType::Admin()){

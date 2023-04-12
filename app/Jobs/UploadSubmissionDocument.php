@@ -40,15 +40,14 @@ class UploadSubmissionDocument implements ShouldQueue
      */
     public function handle()
     {
-        $gdriveController=new GoogleDriveController();
         $cloud_spaces=DB::table('user_cloud_space')
                             ->where('user_id', $this->user->id)
                             ->where('space', 'drive')
                             ->count();
 
         if($cloud_spaces==0){
-            $folder_id=$gdriveController->createDirectory(trim($this->user->name.$this->user->surname));
-            DB::table('user_cloud_space')->insert(['space'=> 'drive', 'dirname' => trim($this->user->name.$this->user->surname), 'dirhash' => $folder_id, 'user_id' => $this->user->id]);
+            $folder_id=$GoogleDriveController::createDirectory(trim($this->user->name.$this->user->lastName));
+            DB::table('user_cloud_space')->insert(['space'=> 'drive', 'dirname' => trim($this->user->name.$this->user->lastName), 'dirhash' => $folder_id, 'user_id' => $this->user->id]);
         }
 
         $folder_hash=DB::table('user_cloud_space')
@@ -56,7 +55,7 @@ class UploadSubmissionDocument implements ShouldQueue
                         ->where('space', 'drive')
                         ->value('dirhash');
 
-        $gdriveController->uploadFile($folder_hash, $this->submission->document_path, "testName.pdf");
+        GoogleDriveController::uploadFile($folder_hash, $this->submission->document_path, $this->submission->id.$this->submission->document_name);
 
 
     }

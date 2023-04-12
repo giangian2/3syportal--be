@@ -8,31 +8,30 @@ use Illuminate\Http\Request;
 
 class GoogleDriveController extends Controller
 {
-    /*1yPy2Mg9iFJGs7hzEtBnsHALQs7bZcZ6P
+    
     public function test(Request $request){
 
-        //return Storage::disk('google')->files("/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b");
-
+	//return "ok";
+        //return Storage::disk('google')->directories("/1YG-PE5TF-d1xjllbqji_QSPyI1VIE3hQ");
+	$this->createDirectory("test2");
         //return Storage::disk('google')->directories("/1Q2s8LsvyYz6e9hm-L6bKMXYcqT7FQv3b");
-
-        //return $this->createDirectory();
     }
-    */
+    
 
 
-    public function createDirectory(string $dirname){
+    public static function createDirectory(string $dirname){
 
         $client = new \Google_Client();
-        $client->setClientId(env("GOOGLE_DRIVE_CLIENT_ID"));
-        $client->setClientSecret(env("GOOGLE_DRIVE_CLIENT_SECRET"));
-        $client->refreshToken(env("GOOGLE_DRIVE_REFRESH_TOKEN"));
+        $client->setClientId('843381078994-qhrd02ecu7das6p3jkvla9h32je1gkpv.apps.googleusercontent.com');
+        $client->setClientSecret('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');
+        $client->refreshToken('1//041eWxaYtmx8vCgYIARAAGAQSNwF-L9Ir371pPtvZqoSn8NciQWsupgyecUb0xu6CjSC7VxErKNji1ts0rA89A2JQsIRtytBbJK4');
 
         $service = new \Google_Service_Drive($client);
 
         $fileMetadata = new \Google_Service_Drive_DriveFile([
             'name'     => $dirname,
             'mimeType' => 'application/vnd.google-apps.folder',
-            'parents' => array(env("GOOGLE_DRIVE_FOLDER")),
+            'parents' => array('1YG-PE5TF-d1xjllbqji_QSPyI1VIE3hQ'),
         ]);
 
         //GOOGLE CLIENT API LIBRARY ERROR, USE THIS LINE TO REMOVE THE ERROR
@@ -43,8 +42,8 @@ class GoogleDriveController extends Controller
         return $folder->id;
     }
 
-    public function uploadFile(string $dirHash, string $storagePath, string $filename){
-        return Storage::disk('google')->put('/'.env("GOOGLE_DRIVE_FOLDER").'/'.$dirHash.'/'.$filename, Storage::disk('s3')->get($storagePath) , 'public');
+    public static function uploadFile(string $dirHash, string $storagePath, string $filename){
+        return Storage::disk('google')->put('/'.'1YG-PE5TF-d1xjllbqji_QSPyI1VIE3hQ'.'/'.$dirHash.'/'.$filename, Storage::disk('s3')->get($storagePath) , 'public');
     }
 
 

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Enums\UserType;
 use BenSampo\Enum\Rules\EnumValue;
+use App\Http\Resources\UserResource;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Mail\FirstAccessMail;
@@ -80,7 +81,7 @@ class AuthController extends Controller
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
-            'user' => $user,
+            'user' => new UserResource($user),
             'token' => $token
         ];
 

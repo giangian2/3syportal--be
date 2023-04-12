@@ -91,7 +91,7 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r" valign="top" align="center" style="padding:0;Margin:0;width:560px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;font-size:0px"><img src="https://vgciwu.stripocdn.email/content/guids/b3e8abd8-e267-48a1-b517-94e1b7dbedfa/images/3sy.gif" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;font-size:12px" title="Logo" height="50" width="89"></td>
+                      <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;font-size:0px"><img src="https://firebasestorage.googleapis.com/v0/b/sy-website-93038.appspot.com/o/3SY-emailportal.png?alt=media&token=7a1e13f1-d722-4554-857d-ba7c4fcc1d83" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;font-size:12px" title="Logo" height="80" width="109"></td>
                      </tr>
                    </table></td>
                  </tr>
