@@ -46,7 +46,7 @@ class UploadSubmissionDocument implements ShouldQueue
                             ->count();
 
         if($cloud_spaces==0){
-            $folder_id=$GoogleDriveController::createDirectory(trim($this->user->name.$this->user->lastName));
+            $folder_id=GoogleDriveController::createDirectory(trim($this->user->name.$this->user->lastName));
             DB::table('user_cloud_space')->insert(['space'=> 'drive', 'dirname' => trim($this->user->name.$this->user->lastName), 'dirhash' => $folder_id, 'user_id' => $this->user->id]);
         }
 
