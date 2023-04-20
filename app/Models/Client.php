@@ -47,6 +47,6 @@ class Client extends Model
 
     public function offers(): HasMany
     {
-        return $this->hasMany(Offer::class, 'offer_id', 'id');
+        return $this->hasMany(Offer::class, 'talent_id', 'id');
     }
 }

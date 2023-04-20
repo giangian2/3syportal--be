@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Talent extends Model
 {
@@ -47,5 +48,15 @@ class Talent extends Model
     public function verticalities(): BelongsToMany
     {
         return $this->belongsToMany(Verticality::class, 'talent_verticalities', 'talent_id', 'verticality_id');
+    }
+
+    public function proposed_offers(): BelongsToMany
+    {
+        return $this->belongsToMany(Offer::class, 'offer_talents', 'talent_id', 'offer_id');
+    }
+
+    public function social_infos(): HasMany
+    {
+        return $this->hasMany(SocialInfo::class, 'talent_id', 'id');
     }
 }
