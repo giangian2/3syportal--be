@@ -8,7 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Enums\UserRoles;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\MailResetPasswordNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -47,4 +49,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'role' => UserRoles::class
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+	    $this->notify(new MailResetPasswordNotification($token));
+    }
 }

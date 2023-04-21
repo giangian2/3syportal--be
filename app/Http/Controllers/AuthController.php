@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Storage;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -25,11 +26,15 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt(Str::random(8)),
             'role' => $request->role
-        ])->sendEmailVerificationNotification();
+        ]);
 
+        $resp=$user;
+        $user->sendEmailVerificationNotification();
+
+        $user=User::where('email', '$request->email')->get();
 
         $response = [
-            'user' => $user,
+            'user' => new UserResource($resp),
         ];
 
         return response($response, 201);
@@ -54,7 +59,7 @@ class AuthController extends Controller
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
-            'user' => $user,
+            'user' => new UserResource($user),
             'token' => $token
         ];
 

@@ -34,7 +34,7 @@ class VerificationController extends Controller
                 'data' => $user
             ], Response::HTTP_OK);
 	     */
-	        return redirect()->away('https://www.tua.blacknachos.com/verify?email='.$user->email );
+	        return "mail verified";
 	    }
 
         /*
@@ -43,7 +43,7 @@ class VerificationController extends Controller
             'message' => 'Error: email not verified',
         ], Response::HTTP_BAD_REQUEST);
 	    */
-	    return redirect()->away('https://www.tua.blacknachos.com/login');
+	    return "email already verified";
 
     }
 }
