@@ -34,6 +34,8 @@ class VerificationController extends Controller
                 'data' => $user
             ], Response::HTTP_OK);
 	     */
+
+
 	        return "mail verified";
 	    }
 

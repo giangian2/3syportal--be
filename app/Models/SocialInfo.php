@@ -17,6 +17,7 @@ class SocialInfo extends Model
     protected $fillable = [
         'id',
         'talent_id',
+        'social_id',
         'link',
         'followers',
         'last_8_posts_likes',

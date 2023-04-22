@@ -2,31 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TalentResource;
 use Illuminate\Http\Request;
 use App\Models\Talent;
 use App\Models\Verticality;
 use App\Models\TalentVerticality;
+use App\Models\Social;
+use App\Models\SocialInfo;
 
 class TalentController extends Controller
 {
-    public function test()
+    /**
+     * @param Request
+     * @return Response
+     */
+
+    public function index(Request $request)
     {
-        $talent = Talent::create([
-            'name' => 'testName',
-        ]);
-
-        $verticality = Verticality::create([
-            'description' => 'bho5',
-        ]);
-
-        $talent_verticality = TalentVerticality::create([
-            'talent_id' => $talent->id,
-            'verticality_id' => $verticality->id,
-        ]);
-
+        //Talent::find($talent->id)->with('social_infos')->findOrFail($talent->id)
+        $talents=Talent::select('id','name', 'surname', 'mediaKit_src', 'birth_date', 'email', 'phone')
+                            ->with('verticalities')
+                            ->with('social_infos')->get();
 
         return response()->json([
-            'res' => Talent::find($talent->id)->with('verticalities')->findOrFail($talent->id)
+            'talents' => TalentResource::collection($talents)
         ], 200);
+
+    }
+
+    public function store()
+    {
+
+    }
+
+    public function show($id)
+    {
+
+    }
+
+    public function delete($id)
+    {
+
+    }
+
+    public function update($id)
+    {
+
     }
 }
