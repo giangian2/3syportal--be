@@ -109,9 +109,7 @@ class AccountController extends Controller
 
         $receiver=User::find($user->id);
 
-        $user->deleted_at=Carbon::now();
-        $user->tokens()->delete();
-        $user->save();
+	$user->delete();
 
         event(new DeletedUser($receiver));
 
