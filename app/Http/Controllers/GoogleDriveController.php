@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class GoogleDriveController extends Controller
@@ -44,11 +45,12 @@ class GoogleDriveController extends Controller
     }
 
     public static function uploadFile(string $dirHash, string $storagePath, string $filename){
-	    try{ Storage::disk('google')->put('/'.'1YG-PE5TF-d1xjllbqji_QSPyI1VIE3hQ'.'/'.$dirHash.'/'.$filename, Storage::disk('s3')->get($storagePath) , 'public');
-
-	    	return "ok";
-	    }catch(Exception $e){
-		    return $e;
+	    $file=Storage::disk('s3')->get($storagePath);
+	    if($file==null){
+		throw new \ErrorException('Error found');
+	    }
+	    if(!Storage::disk('google')->put('/'.'1YG-PE5TF-d1xjllbqji_QSPyI1VIE3hQ'.'/'.$dirHash.'/'.$filename, Storage::disk('s3')->get($storagePath) , 'public')){
+		    Log::error("Cant upload file");
 	    }
     }
 

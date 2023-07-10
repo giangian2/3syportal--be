@@ -174,9 +174,13 @@ class SubmissionController extends Controller
             'from_user' => $sender->id
         ]);
 
-        if ($request->status != SubmissionStatus::Valid()) {
+	if ($request->status != SubmissionStatus::Valid()) {
             event(new SubmissionCreated($user, $new_submission));
-        }
+	}else{
+	   $this->dispatch(new UploadSubmissionDocument( $user,$new_submission));
+
+	}
+
 
         return response()->json([
             'message' => 'Submission Created Succesfully!',
